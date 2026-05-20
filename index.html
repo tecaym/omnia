@@ -539,6 +539,15 @@ footer{background:var(--black-card);border-top:1px solid var(--gray-mid);padding
   .navbar{padding:0 1rem}
   .nav-links{display:none}
   .nav-ham{display:flex}
+  /* Logos : désactive animation lourde sur mobile, garde filtre statique */
+  .nav-logo-img,.hero-logo-img{
+    animation:none;
+    filter:brightness(0) invert(1)
+      drop-shadow(0 0 10px rgba(139,0,255,.9))
+      drop-shadow(0 0 28px rgba(139,0,255,.7))
+      drop-shadow(0 0 55px rgba(0,245,255,.45));
+    will-change:auto;
+  }
   .btn{padding:.75rem 1.5rem;font-size:.8rem}
   .events-grid{grid-template-columns:1fr}
   .artists-grid{grid-template-columns:repeat(2,1fr)}
