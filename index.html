@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <meta name="description" content="OMNIA — La boîte de nuit la plus exclusive de Paris."/>
 <title>OMNIA — Everything. Every Night.</title>
-<link rel="preload" href="assets/hero-bg.mp4" as="video" type="video/mp4"/>
+<link rel="preload" href="assets/hero-bg-v2.mp4" as="video" type="video/mp4"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -581,7 +581,7 @@ footer{background:var(--black-card);border-top:1px solid var(--gray-mid);padding
 <script>
 // Précharge et démarre la vidéo le plus tôt possible
 window.__vid=document.createElement('video');
-window.__vid.src='assets/hero-bg.mp4';
+window.__vid.src='assets/hero-bg-v2.mp4';
 window.__vid.muted=true;
 window.__vid.loop=true;
 window.__vid.playsInline=true;
@@ -625,7 +625,7 @@ window.__vid.play().catch(()=>{});
 <section id="hero">
   <div class="hero-bg" aria-hidden="true">
     <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto">
-      <source src="assets/hero-bg.mp4" type="video/mp4"/>
+      <source src="assets/hero-bg-v2.mp4" type="video/mp4"/>
     </video>
     <div class="hero-video-overlay"></div>
     <div class="mesh-orb mesh-orb-1"></div>
