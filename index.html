@@ -594,6 +594,18 @@ window.__vid.play().catch(()=>{});
 
 
 <!-- ═══════════════════════════════════════
+     BARRE ANNONCE MAUVE
+═══════════════════════════════════════ -->
+<div id="top-bar" style="
+  background:linear-gradient(90deg,var(--violet-dim),var(--violet),var(--violet-dim));
+  color:#fff;text-align:center;font-family:var(--font-mono);
+  font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;
+  padding:.55rem 1rem;position:relative;z-index:200;
+  border-bottom:1px solid rgba(255,255,255,.1);">
+  ✦ &nbsp;BELGIQUE &nbsp;✦&nbsp; SOIRÉE EXCLUSIVE &nbsp;✦&nbsp; 20 ANS MINIMUM &nbsp;✦&nbsp; RÉSERVATION OBLIGATOIRE &nbsp;✦
+</div>
+
+<!-- ═══════════════════════════════════════
      NAVBAR
 ═══════════════════════════════════════ -->
 <header class="navbar" role="banner">
@@ -659,10 +671,10 @@ window.__vid.play().catch(()=>{});
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker-track" id="ticker">
     <span class="ticker-item">OMNIA <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">CLUB <span class="ticker-sep">✦</span></span>
     <span class="ticker-item">HOUSE <span class="ticker-sep">✦</span></span>
     <span class="ticker-item">ELITE VIBES <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">BRUXELLES <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">BELGIQUE <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">20 ANS+ <span class="ticker-sep">✦</span></span>
   </div>
 </div>
 
@@ -672,9 +684,9 @@ window.__vid.play().catch(()=>{});
 <section class="stats-strip">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-item reveal"><div class="stat-number" data-count="500" data-suffix="+">0</div><div class="stat-label">Capacité</div></div>
+      <div class="stat-item reveal"><div class="stat-number" data-count="200" data-suffix="+">0</div><div class="stat-label">Capacité</div></div>
       <div class="stat-item reveal rd1"><div class="stat-number" data-count="20" data-suffix=" ans">0</div><div class="stat-label">Minimum</div></div>
-      <div class="stat-item reveal rd2"><div class="stat-number" data-count="10000" data-suffix="+">0</div><div class="stat-label">Visites à nos soirées</div></div>
+      <div class="stat-item reveal rd2"><div class="stat-number" data-count="5000" data-suffix="+">0</div><div class="stat-label">Visites à nos soirées</div></div>
     </div>
   </div>
 </section>
@@ -741,6 +753,31 @@ window.__vid.play().catch(()=>{});
     <div class="lb-counter" id="lb-counter"></div>
   </div>
 </div>
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     PROCHAINE ÉVÉNEMENT
+═══════════════════════════════════════ -->
+<section id="events-next" style="padding:7rem 0;background:var(--black);position:relative;overflow:hidden;">
+  <!-- orbes déco -->
+  <div style="position:absolute;top:-80px;right:-80px;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle,rgba(139,0,255,.18) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-60px;left:-60px;width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(0,245,255,.1) 0%,transparent 70%);pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-eyebrow">Agenda</span>
+      <h2 class="section-title reveal">Prochaine Événement</h2>
+    </div>
+    <div id="next-events-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;"></div>
+    <div style="text-align:center;margin-top:3rem;">
+      <a href="https://omniabrussels.eventsquare.store/fr/vs1f36hygniv/hnngiss02cgx?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="btn btn-primary" style="font-size:.9rem;padding:1rem 2.5rem;">
+        Voir tous les tickets &nbsp;→
+      </a>
+    </div>
+  </div>
+</section>
+
 <div class="divider"></div>
 
 <!-- ═══════════════════════════════════════
@@ -1024,6 +1061,52 @@ const GALLERY = [
       <div class="event-foot">
         <span style="font-size:.75rem;color:var(--white-dim);">Capacité limitée</span>
         <a href="https://omniabrussels.eventsquare.store/fr/vs1f36hygniv/hnngiss02cgx?utm_source=ighref="#reservation"utm_medium=socialhref="#reservation"utm_content=link_in_biohref="#reservation"fbclid=PAdGRleAR6AxxleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAaffrx0RoJ3Nyg1x84ABCYQ1RGo3g6NRIJinUWJhsnKHB9OaEyDvLfafTqe_VQ_aem_ZJ2lYOMoueW6ny4n4myT3w" target="_blank" class="btn btn-gold" style="padding:.5rem 1.2rem;font-size:.78rem;">Tickets →</a>
+      </div>
+    </article>
+  `).join('');
+})();
+
+/* ── PROCHAINE ÉVÉNEMENT ── */
+(function(){
+  const grid=document.getElementById('next-events-grid');
+  if(!grid)return;
+  // Affiche les 3 premiers events comme "prochains"
+  const next=EVENTS.slice(0,3);
+  grid.innerHTML=next.map(ev=>`
+    <article class="reveal" style="
+      background:linear-gradient(145deg,${ev.c1} 0%,${ev.c2}18 100%);
+      border:1px solid ${ev.c2}40;border-radius:20px;overflow:hidden;
+      display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s;cursor:default;"
+      onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.6),0 0 40px ${ev.c2}30'"
+      onmouseleave="this.style.transform='';this.style.boxShadow=''">
+      <!-- Header couleur -->
+      <div style="padding:2rem 2rem 1.5rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.3em;color:${ev.c2};margin-bottom:.5rem;text-transform:uppercase;">
+            ${ev.day} ${ev.mo} &nbsp;·&nbsp; ${ev.time}
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:.06em;color:#fff;line-height:1;margin-bottom:.4rem;">${ev.theme}</h3>
+          <p style="font-size:.82rem;color:rgba(255,255,255,.55);letter-spacing:.05em;">${ev.dj}</p>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-family:var(--font-display);font-size:2rem;color:${ev.c2};line-height:1;">${ev.price}</div>
+          ${ev.badge?`<span style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:${ev.badge==='vip'?'rgba(255,215,0,.25)':'rgba(255,60,60,.25)'};border:1px solid ${ev.badge==='vip'?'rgba(255,215,0,.5)':'rgba(255,60,60,.5)'};border-radius:99px;padding:.2rem .7rem;display:inline-block;margin-top:.4rem;">${ev.badge==='hot'?'🔥 Bientôt complet':'★ VIP'}</span>`:''}
+        </div>
+      </div>
+      <!-- Genre tags -->
+      <div style="padding:0 2rem 1.5rem;display:flex;gap:.5rem;flex-wrap:wrap;">
+        ${ev.genre.split('/').map(g=>`<span style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid ${ev.c2}60;color:${ev.c2};padding:.2rem .7rem;border-radius:99px;background:${ev.c2}12;">${g.trim()}</span>`).join('')}
+      </div>
+      <!-- Footer -->
+      <div style="margin-top:auto;padding:1.2rem 2rem;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:.72rem;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;">Capacité limitée</span>
+        <a href="https://omniabrussels.eventsquare.store/fr/vs1f36hygniv/hnngiss02cgx?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank"
+          style="display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.4rem;border-radius:99px;
+          background:linear-gradient(135deg,${ev.c2},${ev.c2}99);color:#fff;
+          font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+          transition:opacity .2s;" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">
+          Tickets →
+        </a>
       </div>
     </article>
   `).join('');
