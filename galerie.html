@@ -819,18 +819,41 @@ body{padding-top:0}
 })();
 
 const GALLERY = [
-  {label:'SAISON 1',  c1:'#2d0050',c2:'#8b00ff', e:'✦'},
-  {label:'SAISON 2',  c1:'#001a1a',c2:'#00f5ff', e:'✦'},
-  {label:'SAISON 3',  c1:'#0d001a',c2:'#a020ff', e:'✦'},
-  {label:'SAISON 4',  c1:'#1a1000',c2:'#ffd700', e:'✦'},
-  {label:'SAISON 5',  c1:'#001a00',c2:'#00cc88', e:'✦'},
-  {label:'SAISON 6',  c1:'#1a0a00',c2:'#ff6600', e:'✦'},
-  {label:'SAISON 7',  c1:'#00001a',c2:'#4400cc', e:'✦'},
-  {label:'SAISON 8',  c1:'#1a0000',c2:'#ff3355', e:'✦'},
-  {label:'SAISON 9',  c1:'#0a0a0a',c2:'#8b00ff', e:'✦'},
-  {label:'SAISON 10', c1:'#0d1a1a',c2:'#00f5ff', e:'✦'},
-  {label:'SAISON 11', c1:'#1a1000',c2:'#ffd700', e:'✦'},
-  {label:'SAISON 12', c1:'#0d001a',c2:'#ff00aa', e:'✦'},
+  {label:'SAISON 1',  c1:'#2d0050',c2:'#8b00ff', e:'✦', imgs:[
+    'assets/gallery/saison-1/OMNIA_0002.JPG',
+    'assets/gallery/saison-1/OMNIA_0003.JPG',
+    'assets/gallery/saison-1/OMNIA_0004.JPG',
+    'assets/gallery/saison-1/OMNIA_0006.JPG',
+    'assets/gallery/saison-1/OMNIA_0007.JPG',
+    'assets/gallery/saison-1/OMNIA_0008.JPG',
+    'assets/gallery/saison-1/OMNIA_0009.JPG',
+    'assets/gallery/saison-1/OMNIA_0010.JPG',
+    'assets/gallery/saison-1/OMNIA_0011.JPG',
+    'assets/gallery/saison-1/OMNIA_0012.JPG',
+    'assets/gallery/saison-1/OMNIA_0013.JPG',
+    'assets/gallery/saison-1/OMNIA_0014.JPG',
+    'assets/gallery/saison-1/OMNIA_0015.JPG',
+    'assets/gallery/saison-1/OMNIA_0016.JPG',
+    'assets/gallery/saison-1/OMNIA_0017.JPG',
+    'assets/gallery/saison-1/OMNIA_0018.JPG',
+    'assets/gallery/saison-1/OMNIA_0019.JPG',
+    'assets/gallery/saison-1/OMNIA_0020.JPG',
+    'assets/gallery/saison-1/OMNIA_0021.JPG',
+    'assets/gallery/saison-1/OMNIA_0022.JPG',
+    'assets/gallery/saison-1/OMNIA_0023.JPG',
+    'assets/gallery/saison-1/OMNIA_0024.JPG',
+  ]},
+  {label:'SAISON 2',  c1:'#001a1a',c2:'#00f5ff', e:'✦', imgs:[]},
+  {label:'SAISON 3',  c1:'#0d001a',c2:'#a020ff', e:'✦', imgs:[]},
+  {label:'SAISON 4',  c1:'#1a1000',c2:'#ffd700', e:'✦', imgs:[]},
+  {label:'SAISON 5',  c1:'#001a00',c2:'#00cc88', e:'✦', imgs:[]},
+  {label:'SAISON 6',  c1:'#1a0a00',c2:'#ff6600', e:'✦', imgs:[]},
+  {label:'SAISON 7',  c1:'#00001a',c2:'#4400cc', e:'✦', imgs:[]},
+  {label:'SAISON 8',  c1:'#1a0000',c2:'#ff3355', e:'✦', imgs:[]},
+  {label:'SAISON 9',  c1:'#0a0a0a',c2:'#8b00ff', e:'✦', imgs:[]},
+  {label:'SAISON 10', c1:'#0d1a1a',c2:'#00f5ff', e:'✦', imgs:[]},
+  {label:'SAISON 11', c1:'#1a1000',c2:'#ffd700', e:'✦', imgs:[]},
+  {label:'SAISON 12', c1:'#0d001a',c2:'#ff00aa', e:'✦', imgs:[]},
 ];
 
 /* ── GALLERY CAROUSEL ── */
@@ -859,6 +882,14 @@ const GALLERY = [
 
   /* Render a single item's inner HTML */
   function itemHTML(it){
+    if(it.imgs && it.imgs.length > 0){
+      return `<div class="gc-item-inner" style="position:relative;overflow:hidden;background:${it.c1};">
+        <img src="${it.imgs[0]}" alt="${it.label}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;"/>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.1) 55%,transparent 100%);pointer-events:none;"></div>
+        <span class="gc-label" style="opacity:1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.8);">${it.label}</span>
+        <span style="position:absolute;top:1rem;right:1rem;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;color:rgba(255,255,255,.6);background:rgba(0,0,0,.4);padding:.25rem .6rem;border-radius:99px;">${it.imgs.length} photos</span>
+      </div>`;
+    }
     return `<div class="gc-item-inner" style="background:linear-gradient(145deg,${it.c1},${it.c2});">
       <span style="font-size:3.5rem;opacity:.35;user-select:none;">${it.e}</span>
       <span class="gc-label">${it.label}</span>
@@ -896,8 +927,9 @@ const GALLERY = [
   }
 
   /* Lightbox */
+  let lbPhotoCur = 0;
   function openLB(){
-    lbCur=cur; renderLB();
+    lbCur=cur; lbPhotoCur=0; renderLB();
     lb.classList.add('open');
     document.body.style.overflow='hidden';
   }
@@ -906,16 +938,27 @@ const GALLERY = [
     document.body.style.overflow='';
   }
   function navLB(d){
-    lbCur=(lbCur+d+GALLERY.length)%GALLERY.length;
+    const it=GALLERY[lbCur];
+    if(it.imgs && it.imgs.length > 0){
+      lbPhotoCur=(lbPhotoCur+d+it.imgs.length)%it.imgs.length;
+    } else {
+      lbCur=(lbCur+d+GALLERY.length)%GALLERY.length;
+      lbPhotoCur=0;
+    }
     renderLB();
   }
   function renderLB(){
     const it=GALLERY[lbCur];
-    lbc.innerHTML=`<div style="height:60vh;background:linear-gradient(145deg,${it.c1},${it.c2});display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.25rem;">
-      <span style="font-size:5rem;opacity:.45;">${it.e}</span>
-      <span style="font-family:var(--font-display);font-size:2.5rem;letter-spacing:.15em;opacity:.65;color:#fff;">${it.label}</span>
-    </div>`;
-    if(lbn) lbn.textContent=`${lbCur+1} / ${GALLERY.length}`;
+    if(it.imgs && it.imgs.length > 0){
+      lbc.innerHTML=`<img src="${it.imgs[lbPhotoCur]}" alt="${it.label}" style="max-height:80vh;width:100%;object-fit:contain;display:block;border-radius:12px;"/>`;
+      if(lbn) lbn.textContent=`${it.label} — ${lbPhotoCur+1} / ${it.imgs.length}`;
+    } else {
+      lbc.innerHTML=`<div style="height:60vh;background:linear-gradient(145deg,${it.c1},${it.c2});display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.25rem;">
+        <span style="font-size:5rem;opacity:.45;">${it.e}</span>
+        <span style="font-family:var(--font-display);font-size:2.5rem;letter-spacing:.15em;opacity:.65;color:#fff;">${it.label}</span>
+      </div>`;
+      if(lbn) lbn.textContent=`${lbCur+1} / ${GALLERY.length}`;
+    }
   }
 
   /* Touch / swipe support */
